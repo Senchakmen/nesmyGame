@@ -31,6 +31,11 @@ public class SecurityConfiguration {
                 .roles("USER")
                 .build();
 
+        UserDetails userAd = User.withUsername("user@user")
+                .password(passwordEncoder.encode("password"))
+                .roles("USER")
+                .build();
+
         UserDetails admin = User.withUsername("admin")
                 .password(passwordEncoder.encode("admin"))
                 .roles("USER", "ADMIN")
@@ -41,7 +46,7 @@ public class SecurityConfiguration {
                 .roles("USER2")
                 .build();
 
-        return new InMemoryUserDetailsManager(user, admin, user2);
+        return new InMemoryUserDetailsManager(user, admin, user2, userAd);
     }
 
     @Bean
